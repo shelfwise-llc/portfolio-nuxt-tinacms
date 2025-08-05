@@ -17,6 +17,10 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: ['/sitemap.xml', '/robots.txt']
+    },
+    server: {
+      port: process.env.PORT || 3000,
+      host: '0.0.0.0'
     }
   },
   
