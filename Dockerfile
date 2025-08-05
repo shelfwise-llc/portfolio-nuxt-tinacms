@@ -1,19 +1,21 @@
 # Multi-stage Dockerfile for Nuxt 4 + pnpm
 
 # --- Build Stage ---
-FROM node:20-alpine AS build
+FROM node:18-alpine AS build
 WORKDIR /app
+# Install pnpm via corepack
+RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm run build
+RUN pnpm build
 
 # --- Production Stage ---
-FROM node:20-alpine AS runner
+FROM node:18-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    PORT=3000 \
+    HOST=0.0.0.0
 COPY --from=build /app/.output ./.output
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/node_modules ./node_modules
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["node", ".output/server/index.mjs"]
