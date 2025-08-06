@@ -1,0 +1,14 @@
+# Standard ignores
+node_modules
+.git
+.github
+.vscode
+.idea
+*.log
+*.md
+!README.md
+
+# Preserve TinaCMS files
+!.tina/
+!.tina/**
+!.bun/

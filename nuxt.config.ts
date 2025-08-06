@@ -6,29 +6,36 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
   ],
-  
+
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://localhost:3000'
+  },
+
   runtimeConfig: {
+    public: {
+      NUXT_PUBLIC_TINA_CLIENT_ID: process.env.NUXT_PUBLIC_TINA_CLIENT_ID
+    },
     tina: {
-      clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-      token: process.env.TINA_TOKEN,
+      clientId: process.env.NUXT_PUBLIC_TINA_CLIENT_ID,
+      token: process.env.NUXT_TINA_TOKEN,
     },
   },
-  
+
   nitro: {
     prerender: {
-      routes: ['/sitemap.xml', '/robots.txt']
+      routes: ['/robots.txt']
     },
     server: {
       port: process.env.PORT || 3000,
       host: '0.0.0.0'
     }
   },
-  
+
   image: {
     provider: 'vercel',
     quality: 80,
   },
-  
+
   app: {
     head: {
       title: 'Alex Cosmas - UX Designer & Developer',

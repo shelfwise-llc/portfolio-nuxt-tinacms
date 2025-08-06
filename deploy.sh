@@ -1,41 +1,21 @@
-#!/bin/bash
+# Use Bun as base
+FROM oven/bun:1.1.13
 
-echo "🚀 Starting deployment..."
+WORKDIR /app
 
-# Check if we're in the right directory
-if [ ! -f "package.json" ]; then
-    echo "❌ Error: package.json not found. Make sure you're in the portfolio directory."
-    exit 1
-fi
+# Copy deps first
+COPY package.json bun.lockb ./
+RUN bun install --frozen-lockfile
 
-# Install dependencies if needed
-echo "📦 Installing dependencies..."
-pnpm install
+# Copy source
+COPY . .
 
-# Build TinaCMS
-echo "🏗️ Building TinaCMS..."
-pnpm tinacms build
+# Build TinaCMS + Nuxt
+RUN bun run tinacms build
+RUN bun run build
 
-# Build Nuxt
-echo "🏗️ Building Nuxt..."
-pnpm build
+ENV NODE_ENV=production
+ENV PORT=3000
 
-# Check if build was successful
-if [ $? -eq 0 ]; then
-    echo "✅ Build completed successfully!"
-    echo ""
-    echo "🎉 Your portfolio is ready for deployment!"
-    echo ""
-    echo "Next steps:"
-    echo "1. Push to GitHub: git push origin main"
-    echo "2. Deploy to Vercel: npx vercel --prod"
-    echo "3. Or deploy to Netlify: Connect your GitHub repo"
-    echo ""
-    echo "📝 Don't forget to:"
-    echo "- Set up TinaCMS credentials in your hosting platform"
-    echo "- Configure your custom domain"
-    echo "- Set up environment variables"
-else
-    echo "❌ Build failed. Please check the errors above."
-    exit 1
-fi 
+EXPOSE 3000
+CMD ["bun", "run", "start"]
