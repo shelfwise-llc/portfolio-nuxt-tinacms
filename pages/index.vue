@@ -12,8 +12,57 @@
       </div>
     </section>
 
+    <!-- Quick Summary -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-2xl font-medium tracking-tight mb-6">At a glance</h2>
+            <div class="space-y-4 text-gray-600">
+              <div class="flex items-start space-x-3">
+                <div class="w-5 h-5 mt-0.5 text-blue-600">💻</div>
+                <div>
+                  <div class="font-medium text-gray-900">Designer/Developer</div>
+                  <div class="text-sm">More than a decade, (11years) crafting digital experiences</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="w-5 h-5 mt-0.5 text-blue-600">📍</div>
+                <div>
+                  <div class="font-medium text-gray-900">Based in Nairobi</div>
+                  <div class="text-sm">Working with clients/organizations worldwide</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="w-5 h-5 mt-0.5 text-blue-600">❤️</div>
+                <div>
+                  <div class="font-medium text-gray-900">Passionate about systems</div>
+                  <div class="text-sm">Workflows, user experience and process.</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="w-5 h-5 mt-0.5 text-blue-600">📚</div>
+                <div>
+                  <div class="font-medium text-gray-900">Currently</div>
+                  <div class="text-sm">🌞 9-5: Building Compliance & Goveranance solution for corporate: <br />🌙 6-2: Building a retail insights platform for the Emerging market.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="w-full h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+              <div class="text-white text-center">
+                <div class="text-4xl mb-2">👋</div>
+                <div class="text-lg font-medium">Ready to create something amazing?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Grid Navigation -->
-    <section class="pb-16 max-w-6xl mx-auto px-6">
+    <section class="py-16 max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Work -->
@@ -84,53 +133,6 @@
       </div>
     </section>
 
-    <!-- Quick Summary -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-2xl font-medium tracking-tight mb-6">At a glance</h2>
-            <div class="space-y-4 text-gray-600">
-              <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 mt-0.5 text-blue-600">💻</div>
-                <div>
-                  <div class="font-medium text-gray-900">Full-stack Designer & Developer</div>
-                  <div class="text-sm">10+ years crafting digital experiences</div>
-                </div>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 mt-0.5 text-blue-600">📍</div>
-                <div>
-                  <div class="font-medium text-gray-900">Based in Amsterdam</div>
-                  <div class="text-sm">Working with clients worldwide</div>
-                </div>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 mt-0.5 text-blue-600">❤️</div>
-                <div>
-                  <div class="font-medium text-gray-900">Passionate about systems</div>
-                  <div class="text-sm">Design systems, accessibility, and performance</div>
-                </div>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="w-5 h-5 mt-0.5 text-blue-600">📚</div>
-                <div>
-                  <div class="font-medium text-gray-900">Currently reading</div>
-                  <div class="text-sm">"The Design of Everyday Things" by Don Norman</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="relative">
-            <div class="w-full h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
-              <div class="text-white text-center">
-                <div class="text-4xl mb-2">👋</div>
-                <div class="text-lg font-medium">Ready to create something amazing?</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
   </div>
 </template> 

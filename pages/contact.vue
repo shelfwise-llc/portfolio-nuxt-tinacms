@@ -6,6 +6,11 @@
         <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Whether you're looking for a senior UX designer to join your team full-time or need consulting expertise for specific projects, I'm open to both. Let's discuss what makes the most sense for your needs.
         </p>
+        <div class="mt-4">
+          <NuxtLink to="/manual" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+            Read my working manual →
+          </NuxtLink>
+        </div>
       </div>
 
       <!-- Contact Methods -->
@@ -35,6 +40,21 @@
           <h3 class="font-medium text-gray-900 mb-2">LinkedIn</h3>
           <p class="text-sm text-gray-600 mb-4">Connect professionally</p>
           <a href="https://linkedin.com/in/alexcosmas" class="text-green-600 hover:text-green-700 text-sm font-medium">@alexcosmas</a>
+        </div>
+      </div>
+
+      <!-- Manual Callout -->
+      <div class="bg-blue-50 p-8 rounded-2xl mb-16">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
+            <h3 class="text-xl font-medium text-blue-800 mb-3">Want to know how I work?</h3>
+            <p class="text-blue-700 mb-4">Before we collaborate, check out my working manual to understand my approach, process, and what you can expect when working with me.</p>
+          </div>
+          <div class="md:w-1/3 text-center">
+            <NuxtLink to="/manual" class="gradient-button inline-block px-6 py-3 text-sm font-medium text-white rounded-xl transition-all duration-300">
+              Read My Manual
+            </NuxtLink>
+          </div>
         </div>
       </div>
 
@@ -112,4 +132,4 @@
       </div>
     </section>
   </div>
-</template> 
+</template>

@@ -7,26 +7,21 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
   ],
 
+  css: [
+    '~/assets/css/main.css',
+  ],
+
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://localhost:3000'
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3333'
   },
 
-  runtimeConfig: {
-    public: {
-      NUXT_PUBLIC_TINA_CLIENT_ID: process.env.NUXT_PUBLIC_TINA_CLIENT_ID
-    },
-    tina: {
-      clientId: process.env.NUXT_PUBLIC_TINA_CLIENT_ID,
-      token: process.env.NUXT_TINA_TOKEN,
-    },
-  },
 
   nitro: {
     prerender: {
       routes: ['/robots.txt']
     },
     server: {
-      port: process.env.PORT || 3000,
+      port: process.env.PORT || 3333,
       host: '0.0.0.0'
     }
   },

@@ -1,29 +1,21 @@
+// tina/config.ts
 import { defineConfig } from "tinacms";
-
-// Your hosting provider likely exposes this as an environment variable
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
-
-export default defineConfig({
+var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
+var config_default = defineConfig({
   branch,
-
   // Get this from tina.io
   clientId: process.env.NUXT_PUBLIC_TINA_CLIENT_ID,
   // Get this from tina.io
   token: process.env.NUXT_TINA_TOKEN,
-
   build: {
     outputFolder: "admin",
-    publicFolder: "public",
+    publicFolder: "public"
   },
   media: {
     tina: {
       mediaRoot: "",
-      publicFolder: "public",
-    },
+      publicFolder: "public"
+    }
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
@@ -39,36 +31,36 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "datetime",
             name: "date",
-            label: "Publish Date",
+            label: "Publish Date"
           },
           {
             type: "string",
             name: "description",
-            label: "Description",
+            label: "Description"
           },
           {
             type: "string",
             name: "tags",
             label: "Tags",
-            list: true,
+            list: true
           },
           {
             type: "image",
             name: "featuredImage",
-            label: "Featured Image",
+            label: "Featured Image"
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
+            isBody: true
+          }
+        ]
       },
       {
         name: "caseStudy",
@@ -81,40 +73,40 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "client",
-            label: "Client",
+            label: "Client"
           },
           {
             type: "number",
             name: "duration",
-            label: "Duration (months)",
+            label: "Duration (months)"
           },
           {
             type: "string",
             name: "role",
-            label: "Role",
+            label: "Role"
           },
           {
             type: "string",
             name: "description",
-            label: "Description",
+            label: "Description"
           },
           {
             type: "image",
             name: "heroImage",
-            label: "Hero Image",
+            label: "Hero Image"
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
+            isBody: true
+          }
+        ]
       },
       {
         name: "page",
@@ -127,21 +119,24 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "description",
-            label: "Description",
+            label: "Description"
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
-      },
-    ],
-  },
+            isBody: true
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};

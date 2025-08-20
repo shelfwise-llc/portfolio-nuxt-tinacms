@@ -8,7 +8,4 @@ node_modules
 *.md
 !README.md
 
-# Preserve TinaCMS files
-!.tina/
-!.tina/**
 !.bun/

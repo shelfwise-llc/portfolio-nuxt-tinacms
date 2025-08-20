@@ -1,0 +1,27 @@
+fragment PostParts on Post {
+  __typename
+  title
+  date
+  description
+  tags
+  featuredImage
+  body
+}
+
+fragment CaseStudyParts on CaseStudy {
+  __typename
+  title
+  client
+  duration
+  role
+  description
+  heroImage
+  body
+}
+
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  body
+}
