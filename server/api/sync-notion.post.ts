@@ -15,9 +15,9 @@ function pageToDoc(page: any) {
   return { id: page?.id, title, slug, status, excerpt }
 }
 
-async function upsertDocs(datasetEnv: string, dbEnv: string) {
-  const dataset = process.env[datasetEnv] || ''
-  const dbId = process.env[dbEnv] || ''
+async function upsertDocsSingle() {
+  const dataset = process.env.SANITY_DATASET || process.env.SANITY_DATASET_PORTFOLIO || ''
+  const dbId = process.env.NOTION_DB_ID || ''
   if (!dataset || !dbId) return { dataset, count: 0 }
 
   const sanity = getSanityClient(dataset)
@@ -74,11 +74,7 @@ async function upsertDocs(datasetEnv: string, dbEnv: string) {
 }
 
 export default defineEventHandler(async () => {
-  const results = await Promise.all([
-    upsertDocs('SANITY_DATASET_PORTFOLIO', 'NOTION_DB_PORTFOLIO'),
-    upsertDocs('SANITY_DATASET_CLINIC', 'NOTION_DB_CLINIC'),
-    upsertDocs('SANITY_DATASET_SHELFWISE', 'NOTION_DB_SHELFWISE'),
-  ])
-  return { ok: true, results }
+  const result = await upsertDocsSingle()
+  return { ok: true, result }
 })
 
