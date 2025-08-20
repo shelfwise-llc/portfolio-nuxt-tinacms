@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
+    '@nuxtjs/sanity',
   ],
 
   css: [
@@ -40,5 +41,10 @@ export default defineNuxtConfig({
         { name: 'description', content: 'UX Designer and Developer creating meaningful digital experiences' }
       ],
     }
+  }
+  ,
+  sanity: {
+    projectId: process.env.SANITY_PROJECT_ID || 'k43kgsoq',
+    dataset: process.env.SANITY_DATASET || 'portfolio',
   }
 })
