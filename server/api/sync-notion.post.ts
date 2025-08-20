@@ -26,17 +26,39 @@ async function upsertDocs(datasetEnv: string, dbEnv: string) {
   for (const page of (results || [])) {
     const doc = pageToDoc(page)
     if (!doc.slug) continue
-    if (doc.status !== 'Final' && doc.status !== 'Published') continue
-    const _id = `notion.${doc.slug}`
-    await sanity.createOrReplace({
-      _id,
-      _type: 'post',
-      title: doc.title,
-      slug: { current: doc.slug },
-      excerpt: doc.excerpt,
-      source: 'notion',
-      notionId: doc.id,
-    })
+    const publishedId = `notion.${doc.slug}`
+    const draftId = `drafts.${publishedId}`
+
+    // Treat Notion statuses: Draft/Final -> keep as draft in Sanity. Published -> publish in Sanity
+    if (doc.status === 'Published') {
+      await sanity.createOrReplace({
+        _id: publishedId,
+        _type: 'post',
+        title: doc.title,
+        slug: { current: doc.slug },
+        excerpt: doc.excerpt,
+        source: 'notion',
+        notionId: doc.id,
+        publishedAt: new Date().toISOString(),
+      })
+      // Remove any draft version once published
+      try { await sanity.delete(draftId) } catch {}
+    } else if (doc.status === 'Final' || doc.status === 'Draft') {
+      // Save as draft, ensure published doc is not present (optional)
+      await sanity.createOrReplace({
+        _id: draftId,
+        _type: 'post',
+        title: doc.title,
+        slug: { current: doc.slug },
+        excerpt: doc.excerpt,
+        source: 'notion',
+        notionId: doc.id,
+      })
+      // Optional: remove published if it exists to avoid accidental visibility
+      try { await sanity.delete(publishedId) } catch {}
+    } else {
+      continue
+    }
     count++
   }
   return { dataset, count }

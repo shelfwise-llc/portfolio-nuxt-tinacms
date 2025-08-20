@@ -9,6 +9,10 @@
     "preview": "nuxt preview",
     "start": "node .output/server/index.mjs",
     "sync": "node scripts/sync-notion.mjs",
+    "sanity:login": "npx sanity login",
+    "sanity:init": "npx sanity init --project ${SANITY_PROJECT_ID}",
+    "sanity:datasets": "npx sanity datasets list --project ${SANITY_PROJECT_ID}",
+    "sanity:deploy-schemas": "SANITY_AUTH_TOKEN=${SANITY_API_TOKEN} npx sanity schema deploy --project ${SANITY_PROJECT_ID}",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
