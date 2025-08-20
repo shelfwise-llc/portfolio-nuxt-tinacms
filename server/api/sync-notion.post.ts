@@ -1,5 +1,5 @@
 import { getSanityClient } from '~/server/utils/sanity'
-import { fetchDatabase } from '~/server/utils/notion'
+import { fetchDatabase, fetchPageBlocks, notionBlocksToPortableText } from '~/server/utils/notion'
 
 function toPlainText(rich: any[] = []) {
   return (rich || []).map((r: any) => r?.plain_text || '').join('')
@@ -30,6 +30,13 @@ async function upsertDocs(datasetEnv: string, dbEnv: string) {
     const draftId = `drafts.${publishedId}`
 
     // Treat Notion statuses: Draft/Final -> keep as draft in Sanity. Published -> publish in Sanity
+    // Fetch body blocks and convert to Portable Text
+    let body: any[] = []
+    try {
+      const blocksRes = await fetchPageBlocks(page.id)
+      body = notionBlocksToPortableText(blocksRes.results || [])
+    } catch {}
+
     if (doc.status === 'Published') {
       await sanity.createOrReplace({
         _id: publishedId,
@@ -37,6 +44,7 @@ async function upsertDocs(datasetEnv: string, dbEnv: string) {
         title: doc.title,
         slug: { current: doc.slug },
         excerpt: doc.excerpt,
+        body,
         source: 'notion',
         notionId: doc.id,
         publishedAt: new Date().toISOString(),
@@ -51,6 +59,7 @@ async function upsertDocs(datasetEnv: string, dbEnv: string) {
         title: doc.title,
         slug: { current: doc.slug },
         excerpt: doc.excerpt,
+        body,
         source: 'notion',
         notionId: doc.id,
       })
