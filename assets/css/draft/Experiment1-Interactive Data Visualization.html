@@ -1,0 +1,270 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Data Visualization - Anna Filou</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out forwards; }
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        .fade-in-delay-4 { animation-delay: 0.8s; }
+        .fade-in-delay-5 { animation-delay: 1.0s; }
+        .fade-in-delay-6 { animation-delay: 1.2s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .project-image {
+            transition: transform 0.3s ease;
+        }
+        .project-image:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100 fade-in">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="text-lg font-medium tracking-tight hover:text-gray-600 transition-colors">ANNA FILOU</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm">
+                <a href="/#work" class="text-gray-600 hover:text-gray-900 transition-colors">Work</a>
+                <a href="/#about" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
+                <a href="/#contact" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">EN</a>
+            </div>
+            <button class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="pt-24 pb-8 px-6 max-w-6xl mx-auto">
+        <div class="flex items-center space-x-2 text-sm text-gray-500 fade-in">
+            <a href="/" class="hover:text-gray-900 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <a href="/experiments" class="hover:text-gray-900 transition-colors">Experiments</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-gray-900">Interactive Data Visualization</span>
+        </div>
+    </section>
+
+    <!-- Project Hero -->
+    <section class="px-6 pb-16 max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+            <div class="lg:col-span-8">
+                <h1 class="text-4xl md:text-5xl font-light tracking-tight leading-tight mb-6 fade-in fade-in-delay-1">
+                    Interactive Data Visualization
+                </h1>
+                <p class="text-xl text-gray-600 leading-relaxed mb-8 fade-in fade-in-delay-2">
+                    An experimental project exploring dynamic data representation through animated charts, 
+                    real-time interactions, and innovative visualization techniques that make complex data more accessible and engaging.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 fade-in fade-in-delay-3">
+                    <a href="#" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                        View Live Demo
+                        <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                    </a>
+                    <a href="#" class="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                        View Code
+                        <i data-lucide="github" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="lg:col-span-4">
+                <div class="bg-gray-50 rounded-lg p-6 fade-in fade-in-delay-4">
+                    <h3 class="font-medium mb-4">Project Details</h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <span class="text-gray-500">Role:</span>
+                            <span class="ml-2">Frontend Development, Data Visualization</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Year:</span>
+                            <span class="ml-2">2024</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Type:</span>
+                            <span class="ml-2">Experiment</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">Technologies:</span>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">D3.js</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">React</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">TypeScript</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Image -->
+    <section class="px-6 pb-16 max-w-6xl mx-auto">
+        <div class="project-image rounded-xl overflow-hidden border border-gray-200 fade-in fade-in-delay-5">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&amp;h=800&amp;fit=crop" class="w-full aspect-[3/2] object-cover" alt="Interactive Data Visualization">
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="px-6 pb-16 max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-8 space-y-8">
+                <div class="fade-in fade-in-delay-6">
+                    <h2 class="text-2xl font-medium tracking-tight mb-4">Challenge</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Traditional data visualization tools often fail to engage users and make complex datasets accessible. 
+                        The challenge was to create an interactive system that could transform raw data into compelling, 
+                        understandable visual narratives while maintaining performance and accessibility standards.
+                    </p>
+                </div>
+
+                <div class="fade-in fade-in-delay-6">
+                    <h2 class="text-2xl font-medium tracking-tight mb-4">Approach</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        I developed a modular visualization framework that combines D3.js for data manipulation with React 
+                        for component architecture. The system features:
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                            Real-time data binding with smooth transitions
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                            Interactive filtering and sorting capabilities
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                            Responsive design that works across devices
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                            Accessibility features including keyboard navigation
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lg:col-span-4">
+                <div class="sticky top-24">
+                    <div class="bg-gray-50 rounded-lg p-6 fade-in fade-in-delay-6">
+                        <h3 class="font-medium mb-4">Key Features</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center">
+                                <i data-lucide="zap" class="w-4 h-4 text-yellow-600 mr-2"></i>
+                                <span>Real-time Data Updates</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="mouse-pointer" class="w-4 h-4 text-blue-600 mr-2"></i>
+                                <span>Interactive Elements</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="smartphone" class="w-4 h-4 text-green-600 mr-2"></i>
+                                <span>Mobile Responsive</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="accessibility" class="w-4 h-4 text-purple-600 mr-2"></i>
+                                <span>Accessibility Compliant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Images -->
+    <section class="px-6 pb-16 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="project-image rounded-xl overflow-hidden border border-gray-200 fade-in fade-in-delay-6">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&amp;h=400&amp;fit=crop" class="w-full aspect-[3/2] object-cover" alt="Chart Interface">
+            </div>
+            <div class="project-image rounded-xl overflow-hidden border border-gray-200 fade-in fade-in-delay-6">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&amp;h=400&amp;fit=crop" class="w-full aspect-[3/2] object-cover" alt="Dashboard View">
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="px-6 pb-20 max-w-6xl mx-auto">
+        <div class="bg-gray-50 rounded-xl p-8 lg:p-12">
+            <h2 class="text-2xl font-medium tracking-tight mb-6 fade-in fade-in-delay-6">Results &amp; Impact</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center fade-in fade-in-delay-6">
+                    <div class="text-3xl font-light text-blue-600 mb-2">40%</div>
+                    <div class="text-sm text-gray-600">Faster Data Comprehension</div>
+                </div>
+                <div class="text-center fade-in fade-in-delay-6">
+                    <div class="text-3xl font-light text-green-600 mb-2">60fps</div>
+                    <div class="text-sm text-gray-600">Smooth Animation Performance</div>
+                </div>
+                <div class="text-center fade-in fade-in-delay-6">
+                    <div class="text-3xl font-light text-purple-600 mb-2">95%</div>
+                    <div class="text-sm text-gray-600">Accessibility Score</div>
+                </div>
+            </div>
+            <p class="text-gray-600 leading-relaxed mt-8 fade-in fade-in-delay-6">
+                This experiment successfully demonstrated how thoughtful interaction design can transform static data 
+                into engaging, accessible experiences. The project has since been referenced in several client projects 
+                and contributed to improved data visualization practices across multiple domains.
+            </p>
+        </div>
+    </section>
+
+    <!-- Next Project -->
+    <section class="px-6 py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-medium tracking-tight">Next Project</h2>
+                <a href="/experiments" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">View All →</a>
+            </div>
+            <a href="#" class="group block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <div class="aspect-[4/3] md:aspect-auto">
+                        <img src="https://images.unsplash.com/photo-1618556450991-2f1af64e8191?w=600&amp;h=400&amp;fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Next Project">
+                    </div>
+                    <div class="p-8 flex flex-col justify-center">
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium w-fit mb-3">Visual</span>
+                        <h3 class="text-xl font-medium mb-3">Generative Art Series</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Algorithmic art exploration using mathematical patterns and color theory to create dynamic visual compositions.
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 px-6 py-8">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500">
+            <div>© 2024 Anna Filou. All rights reserved.</div>
+            <div class="flex items-center space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-gray-900 transition-colors">Privacy</a>
+                <a href="#" class="hover:text-gray-900 transition-colors">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body></html>

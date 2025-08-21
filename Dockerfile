@@ -1,21 +1,37 @@
-FROM node:20-bullseye
+# Build stage
+FROM node:20-alpine AS build
 
 WORKDIR /app
-
-ENV NODE_ENV=production
-ENV PORT=3333
-ENV HOST=0.0.0.0
 
 # Enable pnpm via corepack
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Install deps using pnpm lockfile
+# Copy package files and install dependencies
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Copy source and build
+# Copy the rest of the application
 COPY . .
+
+# Build the application
 RUN pnpm build
 
-EXPOSE 3333
+# Production stage
+FROM node:20-alpine AS production
+
+WORKDIR /app
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3000
+
+# Copy only the built application from the build stage
+COPY --from=build /app/.output /app/.output
+COPY --from=build /app/package.json /app/package.json
+
+# Expose the port the app will run on
+EXPOSE 3000
+
+# Start the application
 CMD ["node", ".output/server/index.mjs"]

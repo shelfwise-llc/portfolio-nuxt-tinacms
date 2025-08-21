@@ -1,0 +1,400 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments - Anna Filou</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out forwards; }
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        .fade-in-delay-4 { animation-delay: 0.8s; }
+        .fade-in-delay-5 { animation-delay: 1.0s; }
+        .fade-in-delay-6 { animation-delay: 1.2s; }
+        .fade-in-delay-7 { animation-delay: 1.4s; }
+        .fade-in-delay-8 { animation-delay: 1.6s; }
+        .fade-in-delay-9 { animation-delay: 1.8s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .experiment-item {
+            transition: all 0.3s ease;
+        }
+        .experiment-item:hover {
+            transform: translateY(-4px);
+        }
+        .experiment-item:hover .experiment-image img {
+            transform: scale(1.02);
+        }
+        .experiment-image {
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .experiment-image img {
+            transition: transform 0.5s ease;
+        }
+        
+        /* Filter Animation */
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #111827;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100 fade-in">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="text-lg font-medium tracking-tight hover:text-gray-600 transition-colors">ANNA FILOU</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm">
+                <a href="/#work" class="text-gray-600 hover:text-gray-900 transition-colors">Work</a>
+                <a href="/#about" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
+                <a href="/#contact" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">EN</a>
+            </div>
+            <button class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="pt-24 pb-8 px-6 max-w-6xl mx-auto">
+        <div class="flex items-center space-x-2 text-sm text-gray-500 fade-in">
+            <a href="/" class="hover:text-gray-900 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-gray-900">Experiments</span>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="px-6 pb-16 max-w-6xl mx-auto">
+        <div class="max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-light tracking-tight leading-tight mb-6 fade-in fade-in-delay-1">
+                Experiments
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl leading-relaxed fade-in fade-in-delay-2">
+                A collection of creative explorations, prototypes, and experimental projects 
+                where I push boundaries and explore new design possibilities.
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Navigation -->
+    <section class="px-6 pb-12 max-w-6xl mx-auto">
+        <div class="flex flex-wrap items-center gap-3 fade-in fade-in-delay-3">
+            <button class="filter-btn active px-4 py-2 bg-gray-900 text-white text-sm rounded-full font-medium" data-filter="all">
+                All
+            </button>
+            <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full font-medium hover:bg-gray-200 transition-colors" data-filter="interactive">
+                Interactive
+            </button>
+            <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full font-medium hover:bg-gray-200 transition-colors" data-filter="visual">
+                Visual
+            </button>
+            <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full font-medium hover:bg-gray-200 transition-colors" data-filter="code">
+                Code
+            </button>
+            <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-full font-medium hover:bg-gray-200 transition-colors" data-filter="concept">
+                Concept
+            </button>
+        </div>
+    </section>
+
+    <!-- Experiments Grid -->
+    <section class="px-6 pb-20 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="experiments-grid">
+            
+            <!-- Experiment 1 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden fade-in fade-in-delay-4" data-category="interactive">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="Interactive Data Visualization">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">Interactive</span>
+                        <span class="text-xs text-gray-500">2024</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Interactive Data Visualization</h3>
+                    <p class="text-sm text-gray-600 mb-4">Exploring dynamic data representation through animated charts and user interactions.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>D3.js</span>
+                            <span>•</span>
+                            <span>React</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 2 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden fade-in fade-in-delay-5" data-category="visual">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618556450991-2f1af64e8191?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="Generative Art Series">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium">Visual</span>
+                        <span class="text-xs text-gray-500">2024</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Generative Art Series</h3>
+                    <p class="text-sm text-gray-600 mb-4">Algorithmic art exploration using mathematical patterns and color theory.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>p5.js</span>
+                            <span>•</span>
+                            <span>Canvas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 3 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden fade-in fade-in-delay-6" data-category="code">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618004912476-29818d81ae2e?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="CSS Animation Library">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">Code</span>
+                        <span class="text-xs text-gray-500">2023</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">CSS Animation Library</h3>
+                    <p class="text-sm text-gray-600 mb-4">Custom animation utilities for enhanced micro-interactions and transitions.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>CSS</span>
+                            <span>•</span>
+                            <span>SCSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 4 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden fade-in fade-in-delay-7" data-category="concept">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="AR Interface Concept">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full font-medium">Concept</span>
+                        <span class="text-xs text-gray-500">2024</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">AR Interface Concept</h3>
+                    <p class="text-sm text-gray-600 mb-4">Conceptual design for augmented reality shopping experiences and spatial UI.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>Figma</span>
+                            <span>•</span>
+                            <span>Prototype</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 5 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden fade-in fade-in-delay-8" data-category="interactive">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="Voice UI Prototype">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">Interactive</span>
+                        <span class="text-xs text-gray-500">2023</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Voice UI Prototype</h3>
+                    <p class="text-sm text-gray-600 mb-4">Experimental voice-controlled interface with visual feedback and commands.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>Web Speech API</span>
+                            <span>•</span>
+                            <span>JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 6 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden fade-in fade-in-delay-9" data-category="visual">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618556450994-a6a128ef0d9d?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="Typography Experiments">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium">Visual</span>
+                        <span class="text-xs text-gray-500">2023</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Typography Experiments</h3>
+                    <p class="text-sm text-gray-600 mb-4">Exploring variable fonts, kinetic typography, and experimental layouts.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>Variable Fonts</span>
+                            <span>•</span>
+                            <span>CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 7 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out 2.0s forwards;" data-category="code">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1618005198906-1297e5c22e5c?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="React Component Library">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">Code</span>
+                        <span class="text-xs text-gray-500">2024</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">React Component Library</h3>
+                    <p class="text-sm text-gray-600 mb-4">Modular component system with accessibility and performance optimizations.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>React</span>
+                            <span>•</span>
+                            <span>TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 8 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out 2.2s forwards;" data-category="concept">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="AI Design Assistant">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full font-medium">Concept</span>
+                        <span class="text-xs text-gray-500">2024</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">AI Design Assistant</h3>
+                    <p class="text-sm text-gray-600 mb-4">Conceptual AI-powered tool for automated design system generation and optimization.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>Machine Learning</span>
+                            <span>•</span>
+                            <span>UX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 9 -->
+            <div class="experiment-item bg-white border border-gray-200 rounded-xl overflow-hidden" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out 2.4s forwards;" data-category="interactive">
+                <div class="experiment-image">
+                    <img src="https://images.unsplash.com/photo-1635070041409-c7e4d119ecbf?w=400&amp;h=300&amp;fit=crop" class="w-full aspect-[4/3] object-cover" alt="3D Web Experience">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">Interactive</span>
+                        <span class="text-xs text-gray-500">2023</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">3D Web Experience</h3>
+                    <p class="text-sm text-gray-600 mb-4">Immersive 3D portfolio showcase with physics-based interactions and animations.</p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm font-medium hover:text-gray-600 transition-colors">View →</a>
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>Three.js</span>
+                            <span>•</span>
+                            <span>WebGL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="px-6 py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-medium tracking-tight mb-6" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out 2.6s forwards;">
+                Interested in Collaborating?
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out 2.8s forwards;">
+                These experiments represent my ongoing exploration of design and technology. 
+                Let's discuss how we can push boundaries together.
+            </p>
+            <a href="/#contact" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out 3.0s forwards;">
+                Get in Touch
+                <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 px-6 py-8">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500">
+            <div>© 2024 Anna Filou. All rights reserved.</div>
+            <div class="flex items-center space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-gray-900 transition-colors">Privacy</a>
+                <a href="#" class="hover:text-gray-900 transition-colors">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const experimentItems = document.querySelectorAll('.experiment-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter items
+                experimentItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body></html>

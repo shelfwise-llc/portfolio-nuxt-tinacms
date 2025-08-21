@@ -30,11 +30,11 @@
             <div class="flex flex-col justify-center">
               <div class="flex items-center space-x-3 mb-6">
                 <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full font-medium">Featured Case Study</span>
-                <span class="text-xs text-gray-500">2024</span>
+                <span class="text-xs text-gray-500">{{ featuredWork?.year || '2024' }}</span>
               </div>
               
-              <h2 class="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">Redesigning Payment Flows for 2M+ Users</h2>
-              <p class="text-gray-600 mb-6 text-lg leading-relaxed">How we reduced checkout abandonment by 34% and increased conversion rates through user research, iterative design, and A/B testing.</p>
+              <h2 class="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">{{ featuredWork?.title || 'Redesigning Payment Flows for 2M+ Users' }}</h2>
+              <p class="text-gray-600 mb-6 text-lg leading-relaxed">{{ featuredWork?.description || 'How we reduced checkout abandonment by 34% and increased conversion rates through user research, iterative design, and A/B testing.' }}</p>
               
               <div class="flex flex-wrap gap-4 mb-8">
                 <div class="flex items-center space-x-2 text-sm text-gray-600">
@@ -52,7 +52,7 @@
               </div>
               
               <div class="flex items-center space-x-4">
-                <NuxtLink to="/work/payment-flows-redesign" class="gradient-button px-6 py-3 text-sm font-medium text-white rounded-xl transition-all duration-300">
+                <NuxtLink :to="featuredWork?.link || '/work/payment-flows-redesign'" class="gradient-button px-6 py-3 text-sm font-medium text-white rounded-xl transition-all duration-300">
                   View Case Study
                 </NuxtLink>
                 <a href="#" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors flex items-center space-x-2">
@@ -113,6 +113,8 @@
 </template>
 
 <script setup>
+import { useSanityContent } from '~/composables/useSanityContent'
+
 const activeFilter = ref('all')
 
 const filters = [
@@ -123,50 +125,105 @@ const filters = [
   { label: 'Research', value: 'research' }
 ]
 
-const projects = [
-  {
-    id: 1,
-    title: 'Gen Z Banking Behaviors',
-    description: 'Comprehensive research study exploring how Gen Z users interact with digital banking products.',
-    category: 'Research',
-    type: 'User Research',
-    icon: '🔍',
-    year: '2024',
-    duration: '4 months',
-    link: '/work/gen-z-banking',
-    filter: 'research'
-  },
-  {
-    id: 2,
-    title: 'Interactive Data Visualization',
-    description: 'Creating engaging data visualizations for complex financial information.',
-    category: 'Experiment',
-    type: 'Data Viz',
-    icon: '📊',
-    year: '2024',
-    duration: '2 months',
-    link: '/work/interactive-data-viz',
-    filter: 'experiment'
-  },
-  {
-    id: 3,
-    title: 'Healthcare App Redesign',
-    description: 'Redesigning a healthcare application for better patient engagement and accessibility.',
-    category: 'Product Design',
-    type: 'Healthcare',
-    icon: '🏥',
-    year: '2023',
-    duration: '8 months',
-    link: '/work/healthcare-app',
-    filter: 'product'
+// Fetch case studies from Sanity
+const { getAllCaseStudies, getFeaturedCaseStudy } = useSanityContent()
+const { data: sanityCaseStudies, pending } = await useAsyncData('all-case-studies', () => getAllCaseStudies())
+const { data: featuredCaseStudy } = await useAsyncData('featured-case-study', () => getFeaturedCaseStudy())
+
+// Format date for display
+const formatDate = (dateString) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric'
+  }).format(date)
+}
+
+// Transform Sanity case studies to the format needed for the UI
+const projects = computed(() => {
+  if (!sanityCaseStudies.value || sanityCaseStudies.value.length === 0) {
+    // Fallback data if no case studies are found in Sanity
+    return [
+      {
+        id: 1,
+        title: 'Gen Z Banking Behaviors',
+        description: 'Comprehensive research study exploring how Gen Z users interact with digital banking products.',
+        category: 'Research',
+        type: 'User Research',
+        icon: '🔍',
+        year: '2024',
+        duration: '4 months',
+        link: '/work/gen-z-banking',
+        filter: 'research'
+      },
+      {
+        id: 2,
+        title: 'Interactive Data Visualization',
+        description: 'Creating engaging data visualizations for complex financial information.',
+        category: 'Experiment',
+        type: 'Data Viz',
+        icon: '📊',
+        year: '2024',
+        duration: '2 months',
+        link: '/work/interactive-data-viz',
+        filter: 'experiment'
+      },
+      {
+        id: 3,
+        title: 'Healthcare App Redesign',
+        description: 'Redesigning a healthcare application for better patient engagement and accessibility.',
+        category: 'Product Design',
+        type: 'Healthcare',
+        icon: '🏥',
+        year: '2023',
+        duration: '8 months',
+        link: '/work/healthcare-app',
+        filter: 'product'
+      }
+    ]
   }
-]
+  
+  return sanityCaseStudies.value
+    .filter(study => !study.featured) // Filter out featured case studies
+    .map(study => ({
+      id: study._id,
+      title: study.title,
+      description: study.excerpt || 'View this case study to learn more...',
+      category: study.category || 'Case Study',
+      type: study.type || 'Design',
+      icon: study.icon || '📝',
+      year: study.year || formatDate(study.publishedAt),
+      duration: study.duration || '3 months',
+      link: `/work/${study.slug.current}`,
+      filter: study.category ? study.category.toLowerCase() : 'case-study'
+    }))
+})
+
+// Get the featured case study
+const featuredWork = computed(() => {
+  if (featuredCaseStudy.value) {
+    return {
+      title: featuredCaseStudy.value.title,
+      description: featuredCaseStudy.value.excerpt || 'How we reduced checkout abandonment by 34% and increased conversion rates through user research, iterative design, and A/B testing.',
+      year: featuredCaseStudy.value.year || formatDate(featuredCaseStudy.value.publishedAt),
+      link: `/work/${featuredCaseStudy.value.slug.current}`
+    }
+  }
+  
+  // Fallback if no featured case study is found
+  return {
+    title: 'Redesigning Payment Flows for 2M+ Users',
+    description: 'How we reduced checkout abandonment by 34% and increased conversion rates through user research, iterative design, and A/B testing.',
+    year: '2024',
+    link: '/work/payment-flows-redesign'
+  }
+})
 
 const filteredProjects = computed(() => {
   if (activeFilter.value === 'all') {
-    return projects
+    return projects.value
   }
-  return projects.filter(project => project.filter === activeFilter.value)
+  return projects.value.filter(project => project.filter === activeFilter.value)
 })
 </script>
 

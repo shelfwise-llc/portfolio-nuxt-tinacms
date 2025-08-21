@@ -7,38 +7,46 @@
       </div>
 
       <!-- Featured Post -->
-      <div class="mb-16">
+      <div v-if="pending" class="mb-16 text-center py-12">
+        <div class="text-gray-500">Loading posts...</div>
+      </div>
+      
+      <div v-else-if="featuredPost" class="mb-16">
         <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl overflow-hidden border border-purple-100">
           <div class="p-8 lg:p-12">
             <div class="flex items-center space-x-3 mb-6">
               <span class="text-xs text-purple-600 bg-purple-100 px-3 py-1 rounded-full font-medium">Featured Post</span>
-              <span class="text-xs text-gray-500">March 15, 2024</span>
+              <span class="text-xs text-gray-500">{{ featuredPost.date }}</span>
             </div>
             
-            <h2 class="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">The Future of Design Systems: Building for Scale and Consistency</h2>
-            <p class="text-gray-600 mb-6 text-lg leading-relaxed">As digital products become more complex, design systems have evolved from simple style guides to comprehensive ecosystems that power entire organizations.</p>
+            <h2 class="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">{{ featuredPost.title }}</h2>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">{{ featuredPost.excerpt }}</p>
             
             <div class="flex items-center space-x-4 mb-8">
               <div class="flex items-center space-x-2 text-sm text-gray-600">
                 <span>📖</span>
-                <span>8 min read</span>
+                <span>{{ featuredPost.readTime }}</span>
               </div>
               <div class="flex items-center space-x-2 text-sm text-gray-600">
                 <span>🏷️</span>
-                <span>Design, Systems</span>
+                <span>{{ featuredPost.category }}</span>
               </div>
             </div>
             
-            <NuxtLink to="/blog/design-systems-future" class="gradient-button px-6 py-3 text-sm font-medium text-white rounded-xl transition-all duration-300 inline-block">
+            <NuxtLink :to="featuredPost.link" class="gradient-button px-6 py-3 text-sm font-medium text-white rounded-xl transition-all duration-300 inline-block">
               Read Article
             </NuxtLink>
           </div>
         </div>
       </div>
+      
+      <div v-else-if="posts.length === 0" class="mb-16 text-center py-12">
+        <div class="text-gray-500">No posts found. Create some in Sanity Studio!</div>
+      </div>
 
       <!-- Blog Posts Grid -->
-      <div class="grid md:grid-cols-2 gap-8">
-        <article v-for="post in posts" :key="post.id" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
+      <div v-if="regularPosts.length > 0" class="grid md:grid-cols-2 gap-8">
+        <article v-for="post in regularPosts" :key="post.id" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
           <div class="aspect-[16/9] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
             <div class="text-center">
               <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3">
@@ -90,48 +98,55 @@
 </template>
 
 <script setup>
-const posts = [
-  {
-    id: 1,
-    title: 'The Future of Design Systems',
-    excerpt: 'How design systems are evolving to power entire organizations and enable better collaboration.',
-    category: 'Design',
-    icon: '🎨',
-    date: 'March 15, 2024',
-    readTime: '8 min read',
-    link: '/blog/design-systems-future'
-  },
-  {
-    id: 2,
-    title: 'User Research Methods That Actually Work',
-    excerpt: 'Practical techniques for conducting effective user research that leads to better design decisions.',
-    category: 'Research',
-    icon: '🔍',
-    date: 'February 28, 2024',
-    readTime: '12 min read',
-    link: '/blog/user-research-methods'
-  },
-  {
-    id: 3,
-    title: 'Building Accessible Web Applications',
-    excerpt: 'A comprehensive guide to creating web applications that work for everyone, regardless of ability.',
-    category: 'Development',
-    icon: '♿',
-    date: 'February 15, 2024',
-    readTime: '15 min read',
-    link: '/blog/accessible-web-apps'
-  },
-  {
-    id: 4,
-    title: 'The Psychology of Color in UX Design',
-    excerpt: 'Understanding how color choices impact user perception and behavior in digital interfaces.',
-    category: 'Design',
-    icon: '🌈',
-    date: 'January 30, 2024',
-    readTime: '10 min read',
-    link: '/blog/color-psychology-ux'
+import { useSanityContent } from '~/composables/useSanityContent'
+
+const { getAllPosts } = useSanityContent()
+const { data: sanityPosts, pending } = await useAsyncData('all-posts', () => getAllPosts())
+
+// Format date for display
+const formatDate = (dateString) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date)
+}
+
+// Transform Sanity posts to the format needed for the UI
+const posts = computed(() => {
+  if (!sanityPosts.value || sanityPosts.value.length === 0) {
+    return []
   }
-]
+  
+  return sanityPosts.value.map(post => ({
+    id: post._id,
+    title: post.title,
+    excerpt: post.excerpt || 'Read this article to learn more...',
+    category: 'Design', // This could be added to the Sanity schema if needed
+    icon: '📝', // This could be added to the Sanity schema if needed
+    date: formatDate(post.publishedAt),
+    readTime: '5 min read', // This could be calculated or added to the Sanity schema
+    link: `/blog/${post.slug.current}`
+  }))
+})
+
+// Get the featured post (first post) and remove it from the regular posts list
+const featuredPost = computed(() => {
+  if (posts.value.length > 0) {
+    return posts.value[0]
+  }
+  return null
+})
+
+// Get all non-featured posts
+const regularPosts = computed(() => {
+  if (posts.value.length <= 1) {
+    return []
+  }
+  return posts.value.slice(1)
+})
 </script>
 
 <style>

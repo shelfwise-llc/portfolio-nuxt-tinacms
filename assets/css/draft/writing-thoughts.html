@@ -1,0 +1,479 @@
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<title>Posts - Alex Cosmas</title></head>
+<body class="bg-white text-gray-900" style="font-family: 'Inter', sans-serif;">
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="logo-text text-lg font-medium tracking-tight">AF</a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/work" class="nav-link text-sm text-gray-600 hover:text-gray-900 transition-colors">Work</a>
+          <a href="/about" class="nav-link text-sm text-gray-600 hover:text-gray-900 transition-colors">About</a>
+          <a href="/now" class="nav-link text-sm text-gray-600 hover:text-gray-900 transition-colors relative">
+            <span>Now</span>
+            <div class="absolute -top-1 -right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          </a>
+          <a href="/posts" class="nav-link nav-link-active text-sm text-gray-900 font-medium transition-colors">Posts</a>
+          <a href="/contact" class="gradient-button px-4 py-2 text-sm font-medium text-white rounded-full transition-all duration-300">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="max-w-4xl mx-auto px-6 pt-28 pb-8">
+    <div class="fade-in">
+      <h1 class="text-4xl font-light tracking-tight text-gray-900 mb-4">Writing &amp; Thoughts</h1>
+      <p class="text-lg text-gray-600 mb-8">Insights on design, technology, and building better products</p>
+      
+      <!-- Search Bar -->
+      <div class="relative mb-6">
+        <div class="relative">
+          <input type="text" id="searchInput" placeholder="Search articles..." class="w-full px-4 py-3 pl-12 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300">
+          <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+            <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
+          </div>
+          <button id="clearSearch" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <!-- Search Results Counter -->
+        <div id="searchResults" class="hidden mt-2 text-sm text-gray-500"></div>
+      </div>
+      
+      <!-- Filter Tags -->
+      <div class="flex flex-wrap gap-3 mb-8">
+        <button class="filter-tag active px-4 py-2 text-sm font-medium rounded-full transition-all duration-300" data-filter="all">All</button>
+        <button class="filter-tag px-4 py-2 text-sm font-medium rounded-full transition-all duration-300" data-filter="design">Design</button>
+        <button class="filter-tag px-4 py-2 text-sm font-medium rounded-full transition-all duration-300" data-filter="ux-research">UX Research</button>
+        <button class="filter-tag px-4 py-2 text-sm font-medium rounded-full transition-all duration-300" data-filter="ai">AI</button>
+        <button class="filter-tag px-4 py-2 text-sm font-medium rounded-full transition-all duration-300" data-filter="process">Process</button>
+        <button class="filter-tag px-4 py-2 text-sm font-medium rounded-full transition-all duration-300" data-filter="insights">Insights</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto px-6 pb-20">
+    
+    <!-- No Results Message -->
+    <div id="noResults" class="hidden text-center py-12">
+      <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+        <i data-lucide="search" class="w-6 h-6 text-gray-400"></i>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">No articles found</h3>
+      <p class="text-gray-600">Try adjusting your search terms or browse all articles below.</p>
+    </div>
+
+    <!-- Featured Post -->
+    <section class="mb-16 fade-in fade-in-delay-1" data-category="ai" data-title="How AI is Reshaping the Design Process: A 6-Month Experiment" data-content="After six months of integrating AI tools into my design workflow, here's what I learned about the future of design, the tools that actually matter, and how to maintain human creativity in an AI-driven world.">
+      <div class="relative bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="1"></path>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"></rect>
+          </svg>
+        </div>
+        
+        <div class="relative">
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full font-medium">Featured</span>
+            <span class="text-xs text-gray-500">December 10, 2024</span>
+          </div>
+          
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4 tracking-tight">How AI is Reshaping the Design Process: A 6-Month Experiment</h2>
+          <p class="text-gray-600 mb-6 leading-relaxed">After six months of integrating AI tools into my design workflow, here's what I learned about the future of design, the tools that actually matter, and how to maintain human creativity in an AI-driven world.</p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-2 text-sm text-gray-600">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <span>8 min read</span>
+              </div>
+              <div class="flex items-center space-x-2 text-sm text-gray-600">
+                <i data-lucide="heart" class="w-4 h-4"></i>
+                <span>24 likes</span>
+              </div>
+            </div>
+            <a href="/posts/ai-design-process" class="gradient-button px-6 py-2 text-sm font-medium text-white rounded-full transition-all duration-300">Read Article</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="fade-in fade-in-delay-2">
+      <h3 class="text-2xl font-medium tracking-tight text-gray-900 mb-8">Recent Posts</h3>
+      
+      <div class="space-y-6" id="postsList">
+        <!-- Post 1 -->
+        <article class="post-card group p-6 border border-gray-200 rounded-xl hover:border-purple-200 hover:shadow-lg transition-all duration-300" data-category="ux-research" data-title="The Complete Guide to Moderated vs. Unmoderated User Testing" data-content="When to choose each method, how to prepare, and what insights you can expect. A practical framework for product teams making research decisions.">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                <i data-lucide="git-branch" class="w-4 h-4 text-blue-600"></i>
+              </div>
+              <div>
+                <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full font-medium">UX Research</span>
+              </div>
+            </div>
+            <span class="text-sm text-gray-500">December 8, 2024</span>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">The Complete Guide to Moderated vs. Unmoderated User Testing</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">When to choose each method, how to prepare, and what insights you can expect. A practical framework for product teams making research decisions.</p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4 text-sm text-gray-600">
+              <span>5 min read</span>
+              <span>•</span>
+              <span>18 likes</span>
+              <span>•</span>
+              <span>3 comments</span>
+            </div>
+            <a href="/posts/user-testing-guide" class="text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors">Read more →</a>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="post-card group p-6 border border-gray-200 rounded-xl hover:border-purple-200 hover:shadow-lg transition-all duration-300" data-category="design" data-title="Building Design Systems That Scale: Lessons from 50+ Components" data-content="Key principles, common pitfalls, and practical strategies for creating design systems that grow with your product and team.">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                <i data-lucide="layers" class="w-4 h-4 text-green-600"></i>
+              </div>
+              <div>
+                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded-full font-medium">Design</span>
+              </div>
+            </div>
+            <span class="text-sm text-gray-500">December 5, 2024</span>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">Building Design Systems That Scale: Lessons from 50+ Components</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">Key principles, common pitfalls, and practical strategies for creating design systems that grow with your product and team.</p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4 text-sm text-gray-600">
+              <span>7 min read</span>
+              <span>•</span>
+              <span>32 likes</span>
+              <span>•</span>
+              <span>8 comments</span>
+            </div>
+            <a href="/posts/design-systems-scale" class="text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors">Read more →</a>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="post-card group p-6 border border-gray-200 rounded-xl hover:border-purple-200 hover:shadow-lg transition-all duration-300" data-category="process" data-title="My Daily Design Routine: Tools, Habits, and Mindset" data-content="A behind-the-scenes look at how I structure my days, manage creative energy, and maintain consistent output as a designer.">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                <i data-lucide="lightbulb" class="w-4 h-4 text-yellow-600"></i>
+              </div>
+              <div>
+                <span class="text-xs text-yellow-600 bg-yellow-100 px-2 py-1 rounded-full font-medium">Process</span>
+              </div>
+            </div>
+            <span class="text-sm text-gray-500">December 1, 2024</span>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">My Daily Design Routine: Tools, Habits, and Mindset</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">A behind-the-scenes look at how I structure my days, manage creative energy, and maintain consistent output as a designer.</p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4 text-sm text-gray-600">
+              <span>4 min read</span>
+              <span>•</span>
+              <span>15 likes</span>
+              <span>•</span>
+              <span>2 comments</span>
+            </div>
+            <a href="/posts/daily-design-routine" class="text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors">Read more →</a>
+          </div>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="post-card group p-6 border border-gray-200 rounded-xl hover:border-purple-200 hover:shadow-lg transition-all duration-300" data-category="ai" data-title="5 AI Tools Every Designer Should Try in 2024" data-content="A curated list of AI tools that actually enhance the design process, with real-world examples and honest reviews from 6 months of testing.">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                <i data-lucide="layers" class="w-4 h-4 text-purple-600"></i>
+              </div>
+              <div>
+                <span class="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full font-medium">AI</span>
+              </div>
+            </div>
+            <span class="text-sm text-gray-500">November 28, 2024</span>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">5 AI Tools Every Designer Should Try in 2024</h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">A curated list of AI tools that actually enhance the design process, with real-world examples and honest reviews from 6 months of testing.</p>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4 text-sm text-gray-600">
+              <span>6 min read</span>
+              <span>•</span>
+              <span>41 likes</span>
+              <span>•</span>
+              <span>12 comments</span>
+            </div>
+            <a href="/posts/ai-tools-designers-2024" class="text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors">Read more →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Load More -->
+    <div class="text-center mt-12 fade-in fade-in-delay-3" id="loadMoreSection">
+      <button class="px-8 py-3 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:border-purple-300 hover:text-purple-600 transition-colors">Load More Posts</button>
+    </div>
+
+    <!-- Newsletter Signup -->
+    <section class="mt-20 fade-in fade-in-delay-4">
+      <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 text-center">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Stay Updated</h2>
+        <p class="text-gray-600 mb-6">Get notified when I publish new articles about design, UX research, and product insights.</p>
+        <div class="max-w-md mx-auto flex gap-3">
+          <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+          <button class="gradient-button px-6 py-3 text-sm font-medium text-white rounded-lg transition-all duration-300">Subscribe</button>
+        </div>
+        <p class="text-xs text-gray-500 mt-3">No spam, unsubscribe anytime.</p>
+      </div>
+    </section>
+  </div>
+
+  <style>
+    /* Gradient System */
+    .gradient-button {
+      background: linear-gradient(135deg, #A07CFE 0%, #E68AFF 100%);
+    }
+    
+    .gradient-button:hover {
+      box-shadow: 0 8px 25px rgba(160, 124, 254, 0.25);
+      transform: translateY(-1px);
+    }
+    
+    .logo-text {
+      background: linear-gradient(135deg, #A07CFE 0%, #E68AFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Navigation */
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #A07CFE 0%, #E68AFF 100%);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link-active::after {
+      width: 100%;
+    }
+    
+    /* Filter Tags */
+    .filter-tag {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .filter-tag:hover {
+      border-color: #c084fc;
+      color: #7c2d12;
+    }
+    
+    .filter-tag.active {
+      background: linear-gradient(135deg, #A07CFE 0%, #E68AFF 100%);
+      color: white;
+      border-color: transparent;
+    }
+    
+    /* Post Cards */
+    .post-card {
+      transition: all 0.3s ease;
+    }
+    
+    .post-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    /* Search Highlight */
+    .search-highlight {
+      background-color: #fef3c7;
+      padding: 1px 2px;
+      border-radius: 2px;
+    }
+    
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .fade-in-delay-1 { animation-delay: 0.2s; }
+    .fade-in-delay-2 { animation-delay: 0.4s; }
+    .fade-in-delay-3 { animation-delay: 0.6s; }
+    .fade-in-delay-4 { animation-delay: 0.8s; }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Typography */
+    body {
+      font-feature-settings: "kern" 1, "liga" 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Search and Filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const clearSearch = document.getElementById('clearSearch');
+      const searchResults = document.getElementById('searchResults');
+      const noResults = document.getElementById('noResults');
+      const filterTags = document.querySelectorAll('.filter-tag');
+      const postsList = document.getElementById('postsList');
+      const featuredPost = document.querySelector('[data-category]');
+      const loadMoreSection = document.getElementById('loadMoreSection');
+      
+      let currentFilter = 'all';
+      let currentSearch = '';
+      
+      // Search functionality
+      searchInput.addEventListener('input', function() {
+        currentSearch = this.value.toLowerCase().trim();
+        
+        if (currentSearch) {
+          clearSearch.classList.remove('hidden');
+        } else {
+          clearSearch.classList.add('hidden');
+        }
+        
+        filterPosts();
+      });
+      
+      // Clear search
+      clearSearch.addEventListener('click', function() {
+        searchInput.value = '';
+        currentSearch = '';
+        clearSearch.classList.add('hidden');
+        filterPosts();
+      });
+      
+      // Filter functionality
+      filterTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          // Remove active class from all tags
+          filterTags.forEach(t => t.classList.remove('active'));
+          // Add active class to clicked tag
+          this.classList.add('active');
+          
+          currentFilter = this.dataset.filter;
+          filterPosts();
+        });
+      });
+      
+      function filterPosts() {
+        const posts = [...postsList.children, featuredPost];
+        let visibleCount = 0;
+        
+        posts.forEach(post => {
+          if (!post || !post.dataset.category) return;
+          
+          const category = post.dataset.category;
+          const title = post.dataset.title.toLowerCase();
+          const content = post.dataset.content.toLowerCase();
+          
+          const matchesFilter = currentFilter === 'all' || category === currentFilter;
+          const matchesSearch = !currentSearch || 
+            title.includes(currentSearch) || 
+            content.includes(currentSearch) ||
+            category.includes(currentSearch);
+          
+          if (matchesFilter && matchesSearch) {
+            post.style.display = 'block';
+            highlightSearchTerms(post);
+            visibleCount++;
+          } else {
+            post.style.display = 'none';
+          }
+        });
+        
+        // Show/hide no results message
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+          loadMoreSection.classList.add('hidden');
+        } else {
+          noResults.classList.add('hidden');
+          loadMoreSection.classList.remove('hidden');
+        }
+        
+        // Update search results counter
+        if (currentSearch) {
+          searchResults.classList.remove('hidden');
+          searchResults.textContent = `Found ${visibleCount} article${visibleCount !== 1 ? 's' : ''} matching "${searchInput.value}"`;
+        } else {
+          searchResults.classList.add('hidden');
+        }
+      }
+      
+      function highlightSearchTerms(post) {
+        if (!currentSearch) return;
+        
+        const title = post.querySelector('h2, h3');
+        const content = post.querySelector('p');
+        
+        if (title) {
+          const originalTitle = title.dataset.originalText || title.textContent;
+          title.dataset.originalText = originalTitle;
+          title.innerHTML = highlightText(originalTitle, currentSearch);
+        }
+        
+        if (content) {
+          const originalContent = content.dataset.originalText || content.textContent;
+          content.dataset.originalText = originalContent;
+          content.innerHTML = highlightText(originalContent, currentSearch);
+        }
+      }
+      
+      function highlightText(text, searchTerm) {
+        if (!searchTerm) return text;
+        
+        const regex = new RegExp(`(${searchTerm})`, 'gi');
+        return text.replace(regex, '<span class="search-highlight">$1</span>');
+      }
+    });
+  </script>
+
+</body></html>

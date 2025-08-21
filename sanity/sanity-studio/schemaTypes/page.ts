@@ -1,23 +1,13 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'post',
-  title: 'Post',
+  name: 'page',
+  title: 'Page',
   type: 'document',
   fields: [
     defineField({ name: 'title', type: 'string', title: 'Title' }),
     defineField({ name: 'slug', type: 'slug', title: 'Slug', options: { source: 'title', maxLength: 96 } }),
-    defineField({ name: 'excerpt', type: 'text', title: 'Excerpt' }),
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'array',
-      of: [
-        { type: 'block' },
-      ],
-    }),
-    defineField({ name: 'source', type: 'string', title: 'Source' }),
+    defineField({ name: 'content', type: 'array', of: [{ type: 'block' }], title: 'Content' }),
     defineField({ name: 'publishedAt', type: 'datetime', title: 'Published at' }),
   ],
 })
-

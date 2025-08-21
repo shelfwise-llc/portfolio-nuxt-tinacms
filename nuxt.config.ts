@@ -18,9 +18,7 @@ export default defineNuxtConfig({
 
 
   nitro: {
-    prerender: {
-      routes: ['/robots.txt']
-    },
+    // Removed prerendering to enable fully dynamic routes with Sanity content
     server: {
       port: process.env.PORT || 3333,
       host: '0.0.0.0'
@@ -46,5 +44,10 @@ export default defineNuxtConfig({
   sanity: {
     projectId: process.env.SANITY_PROJECT_ID || 'k43kgsoq',
     dataset: process.env.SANITY_DATASET || 'portfolio',
+    apiVersion: '2023-03-01',
+    useCdn: false,
+    token: process.env.SANITY_API_TOKEN,
+    preview: true,
+    studioUrl: '/admin'
   }
 })

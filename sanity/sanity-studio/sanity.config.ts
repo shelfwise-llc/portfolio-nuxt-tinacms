@@ -11,7 +11,7 @@ export default defineConfig({
   projectId: 'k43kgsoq',
   dataset: 'portfolio',
 
-  plugins: [structureTool(), visionTool(), workflow({ schemaTypes: ['post'] })],
+  plugins: [structureTool(), visionTool(), workflow({ schemaTypes: ['post', 'page'] })],
 
   schema: {
     types: schemaTypes,

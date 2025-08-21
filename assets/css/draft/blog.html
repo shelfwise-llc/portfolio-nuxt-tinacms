@@ -1,0 +1,272 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Anna Filou</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out forwards; }
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        .fade-in-delay-4 { animation-delay: 0.4s; }
+        .fade-in-delay-5 { animation-delay: 0.5s; }
+        .fade-in-delay-6 { animation-delay: 0.6s; }
+        .fade-in-delay-7 { animation-delay: 0.7s; }
+        .fade-in-delay-8 { animation-delay: 0.8s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100 fade-in">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="text-lg font-medium tracking-tight hover:text-gray-600 transition-colors">ANNA FILOU</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm">
+                <a href="/#work" class="text-gray-600 hover:text-gray-900 transition-colors">Work</a>
+                <a href="/blog" class="text-gray-900 font-medium">Blog</a>
+                <a href="/#about" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
+                <a href="/#contact" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 max-w-6xl mx-auto px-6">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-5xl font-light tracking-tight leading-tight mb-6 fade-in">
+                Thoughts on design, development, and the future of digital experiences
+            </h1>
+            <p class="text-xl text-gray-600 leading-relaxed fade-in fade-in-delay-1">
+                Exploring the intersection of creativity and technology through articles about design systems, user experience, and building better digital products.
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter/Search Bar -->
+    <section class="pb-8 max-w-6xl mx-auto px-6">
+        <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between fade-in fade-in-delay-2">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                    <input type="text" placeholder="Search articles..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64">
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium">All</button>
+                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm font-medium transition-colors">Design</button>
+                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm font-medium transition-colors">Development</button>
+                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm font-medium transition-colors">UX</button>
+                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm font-medium transition-colors">Systems</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="pb-16 max-w-6xl mx-auto px-6">
+        <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white hover:shadow-lg transition-all group fade-in fade-in-delay-3">
+            <div class="md:flex">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&amp;h=400&amp;fit=crop" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Featured article">
+                </div>
+                <div class="md:w-1/2 p-8 md:p-12">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Featured</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">Design Systems</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-medium tracking-tight leading-tight mb-4 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/future-of-design-systems">The Future of Design Systems: Building for Scale and Consistency</a>
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        As digital products become more complex, design systems have evolved from simple style guides to comprehensive ecosystems that power entire organizations. Here's how they're shaping the future of design.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3 text-sm text-gray-500">
+                            <span>March 15, 2024</span>
+                            <span>•</span>
+                            <span>8 min read</span>
+                        </div>
+                        <a href="/blog/future-of-design-systems" class="flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                            Read more <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="pb-16 max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Article 1 -->
+            <article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all fade-in fade-in-delay-4">
+                <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&amp;h=240&amp;fit=crop" class="w-full aspect-[5/3] object-cover group-hover:scale-105 transition-transform duration-500" alt="Accessibility article">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">UX</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">Accessibility</span>
+                    </div>
+                    <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/accessibility-web-design">Accessibility in Modern Web Design</a>
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        How to build inclusive digital experiences that work for everyone, from day one.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>March 8, 2024</span>
+                        <span>6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all fade-in fade-in-delay-5">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&amp;h=240&amp;fit=crop" class="w-full aspect-[5/3] object-cover group-hover:scale-105 transition-transform duration-500" alt="React article">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">Development</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">React</span>
+                    </div>
+                    <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/performant-react-applications">Building Performant React Applications</a>
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Best practices for optimizing React apps and delivering fast, responsive user experiences.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>March 1, 2024</span>
+                        <span>10 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all fade-in fade-in-delay-6">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&amp;h=240&amp;fit=crop" class="w-full aspect-[5/3] object-cover group-hover:scale-105 transition-transform duration-500" alt="Typography article">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Design</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">Typography</span>
+                    </div>
+                    <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/typography-in-digital-design">Typography in Digital Design: More Than Just Fonts</a>
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Understanding how typography shapes user experience and conveys brand personality.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>February 22, 2024</span>
+                        <span>7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all fade-in fade-in-delay-7">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&amp;h=240&amp;fit=crop" class="w-full aspect-[5/3] object-cover group-hover:scale-105 transition-transform duration-500" alt="Mobile design article">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">UX</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">Mobile</span>
+                    </div>
+                    <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/mobile-first-design-principles">Mobile-First Design Principles for 2024</a>
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Why mobile-first design is more important than ever and how to implement it effectively.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>February 15, 2024</span>
+                        <span>5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all fade-in fade-in-delay-8">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&amp;h=240&amp;fit=crop" class="w-full aspect-[5/3] object-cover group-hover:scale-105 transition-transform duration-500" alt="Analytics article">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Analytics</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">Data</span>
+                    </div>
+                    <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/design-decisions-with-data">Making Design Decisions with Data</a>
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        How to balance user data with design intuition to create better products.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>February 8, 2024</span>
+                        <span>9 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all fade-in fade-in-delay-8">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&amp;h=240&amp;fit=crop" class="w-full aspect-[5/3] object-cover group-hover:scale-105 transition-transform duration-500" alt="Remote work article">
+                <div class="p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Process</span>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">Remote</span>
+                    </div>
+                    <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/remote-design-collaboration">Remote Design Collaboration: Tools and Techniques</a>
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Strategies for maintaining creative collaboration in distributed teams.
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span>January 25, 2024</span>
+                        <span>6 min read</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Load More -->
+    <section class="pb-16 max-w-6xl mx-auto px-6 text-center">
+        <button class="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+            Load More Articles
+        </button>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-medium tracking-tight mb-4">Stay Updated</h2>
+            <p class="text-gray-600 mb-8 max-w-md mx-auto">
+                Get notified when I publish new articles about design, development, and the future of digital experiences.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <button type="submit" class="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 px-6 py-8">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500">
+            <div>© 2024 Anna Filou. All rights reserved.</div>
+            <div class="flex items-center space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-gray-900 transition-colors">Privacy</a>
+                <a href="#" class="hover:text-gray-900 transition-colors">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body></html>
