@@ -80,26 +80,26 @@
 
       <!-- Other Projects Grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="project in filteredProjects" :key="project.id" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
+        <div v-for="project in filteredProjects" :key="project._sys.filename" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
           <div class="aspect-[16/9] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
             <div class="text-center">
               <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <span class="text-gray-600 text-xl">{{ project.icon }}</span>
+                <span class="text-gray-600 text-xl">{{ project.icon || '📝' }}</span>
               </div>
-              <div class="text-gray-600 text-sm">{{ project.type }}</div>
+              <div class="text-gray-600 text-sm">{{ project.client || 'Case Study' }}</div>
             </div>
           </div>
           <div class="p-6">
             <div class="flex items-center space-x-2 mb-3">
-              <span class="text-xs text-gray-500">{{ project.year }}</span>
-              <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{{ project.category }}</span>
+              <span class="text-xs text-gray-500">{{ project.year || '2024' }}</span>
+              <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{{ project.role || 'Design' }}</span>
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ project.title }}</h3>
-            <p class="text-gray-600 text-sm mb-4">{{ project.description }}</p>
+            <p class="text-gray-600 text-sm mb-4">{{ project.description || 'View this case study to learn more...' }}</p>
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2 text-sm text-gray-600">
                 <span>⏱️</span>
-                <span>{{ project.duration }}</span>
+                <span>{{ project.duration || '3 months' }}</span>
               </div>
               <NuxtLink :to="project.link" class="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
                 View Project →
@@ -113,7 +113,8 @@
 </template>
 
 <script setup>
-import { useSanityContent } from '~/composables/useSanityContent'
+import { useTinaContent } from '~/composables/useTinaContent'
+import { ref, computed } from 'vue'
 
 const activeFilter = ref('all')
 
@@ -125,31 +126,32 @@ const filters = [
   { label: 'Research', value: 'research' }
 ]
 
-// Fetch case studies from Sanity
-const { getAllCaseStudies, getFeaturedCaseStudy } = useSanityContent()
-const { data: sanityCaseStudies, pending } = await useAsyncData('all-case-studies', () => getAllCaseStudies())
-const { data: featuredCaseStudy } = await useAsyncData('featured-case-study', () => getFeaturedCaseStudy())
+// Fetch case studies from TinaCMS
+const { getAllCaseStudies } = useTinaContent()
+const { data: caseStudies, pending } = await useAsyncData('case-studies', () => getAllCaseStudies())
 
-// Format date for display
-const formatDate = (dateString) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric'
-  }).format(date)
-}
+// Get featured case study (first one marked as featured or first in the list)
+const featuredCaseStudy = computed(() => {
+  if (caseStudies.value && caseStudies.value.length > 0) {
+    const featured = caseStudies.value.find(study => study.featured)
+    return featured || caseStudies.value[0]
+  }
+  return null
+})
 
-// Transform Sanity case studies to the format needed for the UI
+// Variables already declared above
+
+// Transform TinaCMS case studies to the format needed for the UI
 const projects = computed(() => {
-  if (!sanityCaseStudies.value || sanityCaseStudies.value.length === 0) {
-    // Fallback data if no case studies are found in Sanity
+  if (!caseStudies.value || caseStudies.value.length === 0) {
+    // Fallback data if no case studies are found in TinaCMS
     return [
       {
-        id: 1,
+        _sys: { filename: 'gen-z-banking' },
         title: 'Gen Z Banking Behaviors',
         description: 'Comprehensive research study exploring how Gen Z users interact with digital banking products.',
-        category: 'Research',
-        type: 'User Research',
+        role: 'Research',
+        client: 'User Research',
         icon: '🔍',
         year: '2024',
         duration: '4 months',
@@ -157,11 +159,11 @@ const projects = computed(() => {
         filter: 'research'
       },
       {
-        id: 2,
+        _sys: { filename: 'interactive-data-viz' },
         title: 'Interactive Data Visualization',
         description: 'Creating engaging data visualizations for complex financial information.',
-        category: 'Experiment',
-        type: 'Data Viz',
+        role: 'Experiment',
+        client: 'Data Viz',
         icon: '📊',
         year: '2024',
         duration: '2 months',
@@ -169,11 +171,11 @@ const projects = computed(() => {
         filter: 'experiment'
       },
       {
-        id: 3,
+        _sys: { filename: 'healthcare-app' },
         title: 'Healthcare App Redesign',
         description: 'Redesigning a healthcare application for better patient engagement and accessibility.',
-        category: 'Product Design',
-        type: 'Healthcare',
+        role: 'Product Design',
+        client: 'Healthcare',
         icon: '🏥',
         year: '2023',
         duration: '8 months',
@@ -183,19 +185,12 @@ const projects = computed(() => {
     ]
   }
   
-  return sanityCaseStudies.value
+  return caseStudies.value
     .filter(study => !study.featured) // Filter out featured case studies
     .map(study => ({
-      id: study._id,
-      title: study.title,
-      description: study.excerpt || 'View this case study to learn more...',
-      category: study.category || 'Case Study',
-      type: study.type || 'Design',
-      icon: study.icon || '📝',
-      year: study.year || formatDate(study.publishedAt),
-      duration: study.duration || '3 months',
-      link: `/work/${study.slug.current}`,
-      filter: study.category ? study.category.toLowerCase() : 'case-study'
+      ...study,
+      link: `/work/${study._sys.filename}`,
+      filter: study.role ? study.role.toLowerCase() : 'case-study'
     }))
 })
 
@@ -204,9 +199,9 @@ const featuredWork = computed(() => {
   if (featuredCaseStudy.value) {
     return {
       title: featuredCaseStudy.value.title,
-      description: featuredCaseStudy.value.excerpt || 'How we reduced checkout abandonment by 34% and increased conversion rates through user research, iterative design, and A/B testing.',
-      year: featuredCaseStudy.value.year || formatDate(featuredCaseStudy.value.publishedAt),
-      link: `/work/${featuredCaseStudy.value.slug.current}`
+      description: featuredCaseStudy.value.description || 'How we reduced checkout abandonment by 34% and increased conversion rates through user research, iterative design, and A/B testing.',
+      year: featuredCaseStudy.value.year || '2024',
+      link: `/work/${featuredCaseStudy.value.slug}`
     }
   }
   
@@ -235,4 +230,4 @@ const filteredProjects = computed(() => {
 .gradient-button:hover {
   background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
-</style> 
+</style>

@@ -131,6 +131,42 @@ description: "Brief description"
 - Edit `tina/config.ts` to modify content structure
 - Add new fields or collections as needed
 
+## 🔄 Migration from Sanity to TinaCMS
+
+This project was originally built with Sanity CMS but has been migrated to TinaCMS for content management. The migration included:
+
+- Replacing all Sanity components with TinaCMS equivalents
+- Updating all content fetching logic to use TinaCMS client
+- Creating TinaContent component to replace SanityContent
+- Updating all page templates to use TinaCMS data structure
+- Configuring environment variables for TinaCMS authentication
+- Removing Sanity dependencies and configuration
+
+### Environment Variables
+
+For TinaCMS to work properly, you need to set these environment variables:
+
+```bash
+# TinaCMS Authentication
+NUXT_PUBLIC_TINA_CLIENT_ID=your-client-id
+NUXT_TINA_TOKEN=your-token
+```
+
+### Local Development with TinaCMS
+
+1. **Start TinaCMS development server**
+   ```bash
+   pnpm tinacms dev
+   ```
+
+2. **Start Nuxt development server**
+   ```bash
+   pnpm dev
+   ```
+
+3. **Access TinaCMS admin**
+   - TinaCMS Admin: http://localhost:3000/admin
+
 ## 🚀 Deployment
 
 ### Vercel (Recommended)

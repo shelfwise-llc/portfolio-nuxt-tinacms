@@ -5,12 +5,12 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     
     // You can validate the webhook with a secret if needed
-    // const signature = event.node.req.headers['sanity-webhook-signature']
-    // if (!validateSignature(signature, body, process.env.SANITY_WEBHOOK_SECRET)) {
+    // const signature = event.node.req.headers['tina-webhook-signature']
+    // if (!validateSignature(signature, body, process.env.NUXT_TINA_WEBHOOK_SECRET)) {
     //   return { statusCode: 401, body: 'Invalid signature' }
     // }
     
-    console.log('Sanity webhook received:', body)
+    console.log('TinaCMS webhook received:', body)
     
     // Here you would trigger your deployment process
     // This could be a call to Netlify, Vercel, or your own CI/CD system
@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
       body: 'Webhook received and deployment triggered' 
     }
   } catch (error) {
-    console.error('Error processing Sanity webhook:', error)
+    console.error('Error processing TinaCMS webhook:', error)
     return { 
       statusCode: 500, 
       body: 'Error processing webhook' 

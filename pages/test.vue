@@ -4,10 +4,10 @@
     <main class="container mx-auto min-h-screen max-w-3xl p-8">
       <h1 class="text-4xl font-bold mb-8">Posts</h1>
       <ul class="flex flex-col gap-y-4">
-        <li v-for="post in posts" :key="post._id" class="hover:underline">
-          <NuxtLink :to="`/blog/${post.slug?.current}`">
+        <li v-for="post in posts" :key="post.slug" class="hover:underline">
+          <NuxtLink :to="`/blog/${post.slug}`">
             <h2 class="text-xl font-semibold">{{ post.title }}</h2>
-            <p v-if="post.publishedAt">{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
+            <p v-if="post.date">{{ new Date(post.date).toLocaleDateString() }}</p>
           </NuxtLink>
         </li>
       </ul>
@@ -23,11 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import { useSanity } from '#imports'
-import type { SanityDocument } from '@sanity/client'
+import { useTinaContent } from '~/composables/useTinaContent'
 
-const { client } = useSanity()
-const { data: posts } = await useAsyncData('test-posts', () => 
-  client.fetch('*[_type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}')
-)
+const { getAllPosts } = useTinaContent()
+const { data: posts } = await useAsyncData('test-posts', () => getAllPosts())
 </script>

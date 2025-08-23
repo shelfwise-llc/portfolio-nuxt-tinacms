@@ -753,7 +753,7 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
   export type Sdk = ReturnType<typeof getSdk>;
 
 // TinaSDK generated code
-import { createClient, TinaClient } from "tinacms/dist/client";
+import { createClient, TinaClient } from "tinacms";
 
 const generateRequester = (
   client: TinaClient,

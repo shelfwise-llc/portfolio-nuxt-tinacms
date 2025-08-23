@@ -7,7 +7,7 @@
       </div>
 
       <!-- Featured Post -->
-      <div v-if="pending" class="mb-16 text-center py-12">
+      <div v-if="loading" class="mb-16 text-center py-12">
         <div class="text-gray-500">Loading posts...</div>
       </div>
       
@@ -16,20 +16,20 @@
           <div class="p-8 lg:p-12">
             <div class="flex items-center space-x-3 mb-6">
               <span class="text-xs text-purple-600 bg-purple-100 px-3 py-1 rounded-full font-medium">Featured Post</span>
-              <span class="text-xs text-gray-500">{{ featuredPost.date }}</span>
+              <span class="text-xs text-gray-500">{{ formatDate(featuredPost.date) }}</span>
             </div>
             
             <h2 class="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">{{ featuredPost.title }}</h2>
-            <p class="text-gray-600 mb-6 text-lg leading-relaxed">{{ featuredPost.excerpt }}</p>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">{{ featuredPost.description }}</p>
             
             <div class="flex items-center space-x-4 mb-8">
               <div class="flex items-center space-x-2 text-sm text-gray-600">
                 <span>📖</span>
-                <span>{{ featuredPost.readTime }}</span>
+                <span>{{ featuredPost.readTime || '5 min read' }}</span>
               </div>
               <div class="flex items-center space-x-2 text-sm text-gray-600">
                 <span>🏷️</span>
-                <span>{{ featuredPost.category }}</span>
+                <span>{{ featuredPost.tags?.[0] || 'Design' }}</span>
               </div>
             </div>
             
@@ -41,31 +41,31 @@
       </div>
       
       <div v-else-if="posts.length === 0" class="mb-16 text-center py-12">
-        <div class="text-gray-500">No posts found. Create some in Sanity Studio!</div>
+        <div class="text-gray-500">No posts found. Create some in TinaCMS!</div>
       </div>
 
       <!-- Blog Posts Grid -->
       <div v-if="regularPosts.length > 0" class="grid md:grid-cols-2 gap-8">
-        <article v-for="post in regularPosts" :key="post.id" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
+        <article v-for="post in regularPosts" :key="post._sys.filename" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300">
           <div class="aspect-[16/9] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
             <div class="text-center">
               <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <span class="text-gray-600 text-xl">{{ post.icon }}</span>
+                <span class="text-gray-600 text-xl">{{ post.icon || '📝' }}</span>
               </div>
-              <div class="text-gray-600 text-sm">{{ post.category }}</div>
+              <div class="text-gray-600 text-sm">{{ post.tags?.[0] || 'Design' }}</div>
             </div>
           </div>
           <div class="p-6">
             <div class="flex items-center space-x-2 mb-3">
-              <span class="text-xs text-gray-500">{{ post.date }}</span>
-              <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{{ post.category }}</span>
+              <span class="text-xs text-gray-500">{{ formatDate(post.date) }}</span>
+              <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{{ post.tags?.[0] || 'Design' }}</span>
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ post.title }}</h3>
-            <p class="text-gray-600 text-sm mb-4">{{ post.excerpt }}</p>
+            <p class="text-gray-600 text-sm mb-4">{{ post.description || 'Read this article to learn more...' }}</p>
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2 text-sm text-gray-600">
                 <span>📖</span>
-                <span>{{ post.readTime }}</span>
+                <span>{{ post.readTime || '5 min read' }}</span>
               </div>
               <NuxtLink :to="post.link" class="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
                 Read More →
@@ -98,10 +98,12 @@
 </template>
 
 <script setup>
-import { useSanityContent } from '~/composables/useSanityContent'
+import { useTinaContent } from '~/composables/useTinaContent'
+import { ref, computed } from 'vue'
 
-const { getAllPosts } = useSanityContent()
-const { data: sanityPosts, pending } = await useAsyncData('all-posts', () => getAllPosts())
+const { getAllPosts } = useTinaContent()
+const { data: postsData, loading } = await getAllPosts()
+const tinaPosts = ref(postsData)
 
 // Format date for display
 const formatDate = (dateString) => {
@@ -114,21 +116,15 @@ const formatDate = (dateString) => {
   }).format(date)
 }
 
-// Transform Sanity posts to the format needed for the UI
+// Transform TinaCMS posts to the format needed for the UI
 const posts = computed(() => {
-  if (!sanityPosts.value || sanityPosts.value.length === 0) {
+  if (!tinaPosts.value || tinaPosts.value.length === 0) {
     return []
   }
   
-  return sanityPosts.value.map(post => ({
-    id: post._id,
-    title: post.title,
-    excerpt: post.excerpt || 'Read this article to learn more...',
-    category: 'Design', // This could be added to the Sanity schema if needed
-    icon: '📝', // This could be added to the Sanity schema if needed
-    date: formatDate(post.publishedAt),
-    readTime: '5 min read', // This could be calculated or added to the Sanity schema
-    link: `/blog/${post.slug.current}`
+  return tinaPosts.value.map(post => ({
+    ...post,
+    link: `/blog/${post._sys.filename}`
   }))
 })
 
@@ -157,4 +153,4 @@ const regularPosts = computed(() => {
 .gradient-button:hover {
   background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
-</style> 
+</style>

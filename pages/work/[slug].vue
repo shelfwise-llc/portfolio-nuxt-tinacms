@@ -10,18 +10,18 @@
             {{ caseStudy.title }}
           </h1>
           <div class="flex items-center space-x-3 mb-6">
-            <span v-if="caseStudy.category" class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full font-medium">{{ caseStudy.category }}</span>
-            <span class="text-xs text-gray-500">{{ formatDate(caseStudy.publishedAt) }}</span>
+            <span v-if="caseStudy.client" class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full font-medium">{{ caseStudy.client }}</span>
+            <span v-if="caseStudy.role" class="text-xs text-gray-500">{{ caseStudy.role }}</span>
           </div>
-          <div v-if="caseStudy.excerpt" class="text-lg text-gray-600 mb-8 max-w-2xl">
-            {{ caseStudy.excerpt }}
+          <div v-if="caseStudy.description" class="text-lg text-gray-600 mb-8 max-w-2xl">
+            {{ caseStudy.description }}
           </div>
         </div>
         <div class="prose prose-lg max-w-none">
-          <SanityContent v-if="caseStudy.content" :blocks="caseStudy.content" />
+          <TinaContent v-if="caseStudy.body" :content="caseStudy.body" />
         </div>
       </div>
-      <div v-else-if="pending">
+      <div v-else-if="loading">
         <div class="text-center py-12">
           <div class="text-gray-500">Loading...</div>
         </div>
@@ -39,25 +39,13 @@
 </template>
 
 <script setup>
-import { useSanityContent } from '~/composables/useSanityContent'
+import { useTinaContent } from '~/composables/useTinaContent'
+import { ref } from 'vue'
 
 const route = useRoute()
-const { getCaseStudy } = useSanityContent()
-const { data: caseStudy, pending, error } = await useAsyncData(
-  `case-study-${route.params.slug}`,
-  () => getCaseStudy(route.params.slug)
-)
-
-// Format date for display
-const formatDate = (dateString) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(date)
-}
+const { getCaseStudy } = useTinaContent()
+const { data: caseStudyData, loading, error } = await getCaseStudy(route.params.slug)
+const caseStudy = ref(caseStudyData)
 
 // Set page metadata
 useHead(() => ({
@@ -65,7 +53,7 @@ useHead(() => ({
   meta: [
     {
       name: 'description',
-      content: caseStudy.value?.excerpt || 'Case study by Alex Cosmas'
+      content: caseStudy.value?.description || 'Case study by Alex Cosmas'
     }
   ]
 }))

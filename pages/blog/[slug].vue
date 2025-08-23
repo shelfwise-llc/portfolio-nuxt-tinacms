@@ -10,17 +10,17 @@
             {{ post.title }}
           </h1>
           <div class="text-gray-500 mb-6">
-            {{ formatDate(post.publishedAt) }}
+            {{ formatDate(post.date) }}
           </div>
-          <div v-if="post.excerpt" class="text-lg text-gray-600 mb-8 max-w-2xl">
-            {{ post.excerpt }}
+          <div v-if="post.description" class="text-lg text-gray-600 mb-8 max-w-2xl">
+            {{ post.description }}
           </div>
         </div>
         <div class="prose prose-lg max-w-none">
-          <SanityContent v-if="post.body" :blocks="post.body" />
+          <TinaContent v-if="post.body" :content="post.body" />
         </div>
       </div>
-      <div v-else-if="pending">
+      <div v-else-if="loading">
         <div class="text-center py-12">
           <div class="text-gray-500">Loading...</div>
         </div>
@@ -38,14 +38,13 @@
 </template>
 
 <script setup>
-import { useSanityContent } from '~/composables/useSanityContent'
+import { useTinaContent } from '~/composables/useTinaContent'
+import { ref } from 'vue'
 
 const route = useRoute()
-const { getPost } = useSanityContent()
-const { data: post, pending, error } = await useAsyncData(
-  `post-${route.params.slug}`,
-  () => getPost(route.params.slug)
-)
+const { getPost } = useTinaContent()
+const { data: postData, loading, error } = await getPost(route.params.slug)
+const post = ref(postData)
 
 // Format date for display
 const formatDate = (dateString) => {
@@ -64,7 +63,7 @@ useHead(() => ({
   meta: [
     {
       name: 'description',
-      content: post.value?.excerpt || 'Blog post by Alex Cosmas'
+      content: post.value?.description || 'Blog post by Alex Cosmas'
     }
   ]
 }))

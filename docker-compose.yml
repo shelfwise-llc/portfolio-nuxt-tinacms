@@ -7,11 +7,15 @@ services:
       dockerfile: Dockerfile
     container_name: nuxt-app
     ports:
-      - "3000:3000"
+      - "3333:3333"
     environment:
       NODE_ENV: production
-      PORT: 3000
+      PORT: 3333
       HOST: 0.0.0.0
+      # TinaCMS configuration
+      NUXT_PUBLIC_TINA_CLIENT_ID: ${NUXT_PUBLIC_TINA_CLIENT_ID}
+      NUXT_TINA_TOKEN: ${NUXT_TINA_TOKEN}
+      NUXT_PUBLIC_SITE_URL: ${NUXT_PUBLIC_SITE_URL:-http://localhost:3333}
     # Remove volume mapping for production-like testing
     # volumes:
     #   - .:/app

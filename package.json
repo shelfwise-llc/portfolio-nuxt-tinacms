@@ -8,24 +8,18 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "start": "node .output/server/index.mjs",
-    "sanity:login": "pnpm dlx sanity login",
-    "sanity:init": "pnpm dlx sanity init --project ${SANITY_PROJECT_ID}",
-    "sanity:datasets": "pnpm dlx sanity datasets list --project ${SANITY_PROJECT_ID}",
-    "sanity:deploy-schemas": "cd sanity/sanity-studio && SANITY_AUTH_TOKEN=${SANITY_API_TOKEN} pnpm dlx sanity schema deploy --project ${SANITY_PROJECT_ID}",
+    "tinacms:dev": "tinacms dev -c \"nuxt dev\"",
+    "tinacms:build": "tinacms build && nuxt build",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/robots": "^5.4.0",
-    "@nuxtjs/sanity": "^2.0.0",
     "@nuxtjs/sitemap": "^7.4.3",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "@portabletext/types": "^2.0.13",
-    "@portabletext/vue": "^1.0.12",
-    "@sanity/client": "^6.29.1",
-    "@sanity/image-url": "^1.1.0",
-    "groq": "^4.5.0",
+    "@tinacms/cli": "^1.5.29",
     "nuxt": "^4.0.1",
+    "tinacms": "^1.5.20",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   }
